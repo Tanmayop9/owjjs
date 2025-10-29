@@ -2,18 +2,19 @@
 
 ## Before vs After Comparison
 
-### Old Style (With Emojis and Embeds)
-Typically, Discord bots use rich embeds with fields and emojis:
+### Old Style (With Emojis and Embeds) - DISCOURAGED
+Typically, Discord bots use rich embeds with fields and emojis like this:
 
 ```
-📊 Server Information
+[EMOJI] Server Information
 ┌────────────────────────┐
 │ Name: My Server        │
 │ Owner: @User           │
 │ Members: 256           │
 └────────────────────────┘
-✨ Created: Jan 15, 2023
+[EMOJI] Created: Jan 15, 2023
 ```
+(Note: Emojis shown as [EMOJI] in this example)
 
 **Problems with this approach:**
 - Emojis can be distracting and unprofessional
@@ -54,33 +55,33 @@ Roles: 18
 ## Key Improvements
 
 ### 1. No Emojis
-✅ Professional appearance without decorative icons
-✅ Consistent look across all platforms
-✅ Better for professional servers
+- Professional appearance without decorative icons
+- Consistent look across all platforms
+- Better for professional servers
 
 ### 2. No Embed Fields
-✅ Simpler code structure
-✅ Easier to read and maintain
-✅ Better performance (less API overhead)
-✅ More accessible to screen readers
+- Simpler code structure
+- Easier to read and maintain
+- Better performance (less API overhead)
+- More accessible to screen readers
 
 ### 3. Code Block Formatting
-✅ Monospace font for alignment
-✅ Clear visual boundaries
-✅ Professional presentation
-✅ Easy to copy/paste information
+- Monospace font for alignment
+- Clear visual boundaries
+- Professional presentation
+- Easy to copy/paste information
 
 ### 4. ASCII Separators
-✅ Visual hierarchy without graphics
-✅ Clear section separation
-✅ Works in all Discord clients
-✅ Consistent styling
+- Visual hierarchy without graphics
+- Clear section separation
+- Works in all Discord clients
+- Consistent styling
 
 ### 5. Structured Sections
-✅ Logical grouping of information
-✅ Easy to scan and read
-✅ Clear headers and labels
-✅ Consistent layout
+- Logical grouping of information
+- Easy to scan and read
+- Clear headers and labels
+- Consistent layout
 
 ## Implementation Statistics
 
