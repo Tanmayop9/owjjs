@@ -1,0 +1,16 @@
+{
+  "name": "owjjs",
+  "version": "1.0.0",
+  "description": "A Discord bot with improved command UI",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
+  "keywords": ["discord", "bot"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.14.1"
+  }
+}
