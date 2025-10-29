@@ -1,3 +1,5 @@
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+
 module.exports = {
     data: {
         name: 'invite',
@@ -8,22 +10,26 @@ module.exports = {
         const permissions = '8'; // Administrator permission
         const inviteLink = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&permissions=${permissions}&scope=bot`;
         
-        // Clean text-based invite info
-        const inviteInfo = [
-            '```',
-            'BOT INVITE INFORMATION',
-            '═══════════════════════════════════════════════',
-            '',
-            'Invite Link',
-            '─────────────────────────────',
-            `Bot ID: ${clientId}`,
-            `Click the link below to add this bot to your server`,
-            '',
-            '═══════════════════════════════════════════════',
-            '```',
-            `\n**Add Bot to Server:**\n${inviteLink}`
-        ].join('\n');
+        const description = 
+            `**Bot ID:** ${clientId}\n\n` +
+            `Click the button below to add this bot to your server with administrator permissions.`;
         
-        await message.reply(inviteInfo);
+        const embed = new EmbedBuilder()
+            .setTitle('Bot Invite Information')
+            .setDescription(description)
+            .setThumbnail(message.client.user.displayAvatarURL())
+            .setFooter({ text: `Requested by ${message.author.tag}` })
+            .setColor(0x5865F2)
+            .setTimestamp();
+        
+        const row = new ActionRowBuilder()
+            .addComponents(
+                new ButtonBuilder()
+                    .setLabel('Add Bot to Server')
+                    .setURL(inviteLink)
+                    .setStyle(ButtonStyle.Link)
+            );
+        
+        await message.reply({ embeds: [embed], components: [row] });
     }
 };

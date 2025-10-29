@@ -1,17 +1,19 @@
 # owjjs - Discord Bot
 
-A Discord bot with improved command UI featuring clean, text-based responses without emojis or embed fields.
+A Discord bot with improved command UI featuring clean embed-based responses with title, description, footer, and thumbnail (no emojis).
 
 ## Features
 
-- Clean, text-based command responses using code blocks
-- No emojis or embed fields for better readability
+- Discord embeds with clean design
+- Only uses: title, description, footer, and thumbnail
+- No emojis for professional appearance
+- Button components where applicable
 - Easy-to-use command structure
 - Modular command system
 
 ## Commands
 
-All commands use the `!` prefix.
+All commands use the `!` prefix and respond with Discord embeds.
 
 ### General Commands
 
@@ -24,6 +26,11 @@ All commands use the `!` prefix.
 ### Moderation Commands
 
 - `!clear <amount>` - Clear a specified number of messages (requires Manage Messages permission)
+
+### Utility Commands
+
+- `!stats` - Display detailed bot statistics and performance metrics
+- `!invite` - Get the bot invite link (includes a button to add the bot)
 
 ## Setup
 
@@ -59,7 +66,9 @@ owjjs/
 │       ├── info.js
 │       ├── serverinfo.js
 │       ├── userinfo.js
-│       └── clear.js
+│       ├── clear.js
+│       ├── stats.js
+│       └── invite.js
 ├── index.js             # Main bot file
 ├── package.json
 └── README.md
@@ -70,35 +79,38 @@ owjjs/
 To add a new command, create a new file in `src/commands/` with the following structure:
 
 ```javascript
+const { EmbedBuilder } = require('discord.js');
+
 module.exports = {
     data: {
         name: 'commandname',
         description: 'Command description'
     },
     async execute(message, args) {
-        // Command logic here
-        // Use clean text-based responses with code blocks
-        const response = [
-            '```',
-            'TITLE',
-            '─────────────────────────────',
-            'Your content here',
-            '```'
-        ].join('\n');
+        const embed = new EmbedBuilder()
+            .setTitle('Your Title')
+            .setDescription('Your description text here')
+            .setFooter({ text: `Requested by ${message.author.tag}` })
+            .setThumbnail(message.client.user.displayAvatarURL()) // Optional
+            .setColor(0x5865F2)
+            .setTimestamp();
         
-        await message.reply(response);
+        await message.reply({ embeds: [embed] });
     }
 };
 ```
 
 ## UI Design Philosophy
 
-This bot uses a clean, text-based UI approach:
+This bot uses Discord embeds with a minimal, professional approach:
 
-- **No emojis**: Keeps the interface professional and consistent
-- **No embed fields**: Uses code blocks for structured information
-- **ASCII separators**: Creates visual hierarchy without graphics
-- **Consistent formatting**: All commands follow the same style guide
+- **Discord Embeds**: Uses EmbedBuilder for rich, formatted responses
+- **Limited Fields**: Only uses title, description, footer, and thumbnail
+- **No Emojis**: Keeps the interface professional and consistent
+- **Button Components**: Interactive elements where appropriate (e.g., invite command)
+- **Consistent Colors**: Uses Discord Blurple (0x5865F2) as the primary color
+- **Timestamps**: All embeds include timestamps
+- **Request Attribution**: Footers show who requested each command
 
 ## License
 

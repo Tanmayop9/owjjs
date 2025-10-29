@@ -1,3 +1,5 @@
+const { EmbedBuilder } = require('discord.js');
+
 module.exports = {
     data: {
         name: 'clear',
@@ -23,15 +25,14 @@ module.exports = {
         try {
             const deleted = await message.channel.bulkDelete(amount + 1, true);
             
-            const response = [
-                '```',
-                'MESSAGES CLEARED',
-                '─────────────────────────────',
-                `Successfully deleted ${deleted.size - 1} messages`,
-                '```'
-            ].join('\n');
+            const embed = new EmbedBuilder()
+                .setTitle('Messages Cleared')
+                .setDescription(`Successfully deleted **${deleted.size - 1}** messages`)
+                .setFooter({ text: `Cleared by ${message.author.tag}` })
+                .setColor(0x00FF00)
+                .setTimestamp();
             
-            const confirmMessage = await message.channel.send(response);
+            const confirmMessage = await message.channel.send({ embeds: [embed] });
             
             // Delete confirmation message after 3 seconds
             setTimeout(() => confirmMessage.delete().catch(() => {}), 3000);

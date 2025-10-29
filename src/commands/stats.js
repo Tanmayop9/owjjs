@@ -1,3 +1,5 @@
+const { EmbedBuilder } = require('discord.js');
+
 module.exports = {
     data: {
         name: 'stats',
@@ -23,38 +25,32 @@ module.exports = {
         
         const ping = Math.round(message.client.ws.ping);
         
-        // Clean text-based stats display
-        const stats = [
-            '```',
-            'BOT STATISTICS',
-            '═══════════════════════════════════════════════',
-            '',
-            'Performance Metrics',
-            '─────────────────────────────',
-            `Uptime: ${days}d ${hours}h ${minutes}m ${seconds}s`,
-            `WebSocket Ping: ${ping}ms`,
-            `Memory Usage: ${usedMemMB}MB / ${totalMemMB}MB (${memPercent}%)`,
-            `Total Memory (RSS): ${rssMB}MB`,
-            `Node Version: ${process.version}`,
-            `Platform: ${process.platform} ${process.arch}`,
-            '',
-            'Bot Statistics',
-            '─────────────────────────────',
-            `Total Servers: ${totalGuilds}`,
-            `Total Users: ${totalUsers}`,
-            `Total Channels: ${totalChannels}`,
-            `Loaded Commands: ${totalCommands}`,
-            '',
-            'Cache Information',
-            '─────────────────────────────',
-            `Guilds Cache: ${message.client.guilds.cache.size}`,
-            `Users Cache: ${message.client.users.cache.size}`,
-            `Channels Cache: ${message.client.channels.cache.size}`,
-            '',
-            '═══════════════════════════════════════════════',
-            '```'
-        ].join('\n');
+        const description = 
+            `**Performance Metrics**\n` +
+            `Uptime: ${days}d ${hours}h ${minutes}m ${seconds}s\n` +
+            `WebSocket Ping: ${ping}ms\n` +
+            `Memory Usage: ${usedMemMB}MB / ${totalMemMB}MB (${memPercent}%)\n` +
+            `Total Memory (RSS): ${rssMB}MB\n` +
+            `Node Version: ${process.version}\n` +
+            `Platform: ${process.platform} ${process.arch}\n\n` +
+            `**Bot Statistics**\n` +
+            `Total Servers: ${totalGuilds}\n` +
+            `Total Users: ${totalUsers}\n` +
+            `Total Channels: ${totalChannels}\n` +
+            `Loaded Commands: ${totalCommands}\n\n` +
+            `**Cache Information**\n` +
+            `Guilds Cache: ${message.client.guilds.cache.size}\n` +
+            `Users Cache: ${message.client.users.cache.size}\n` +
+            `Channels Cache: ${message.client.channels.cache.size}`;
         
-        await message.reply(stats);
+        const embed = new EmbedBuilder()
+            .setTitle('Bot Statistics')
+            .setDescription(description)
+            .setThumbnail(message.client.user.displayAvatarURL())
+            .setFooter({ text: `Requested by ${message.author.tag}` })
+            .setColor(0x5865F2)
+            .setTimestamp();
+        
+        await message.reply({ embeds: [embed] });
     }
 };

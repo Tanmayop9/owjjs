@@ -1,3 +1,5 @@
+const { EmbedBuilder } = require('discord.js');
+
 module.exports = {
     data: {
         name: 'userinfo',
@@ -13,18 +15,12 @@ module.exports = {
             day: 'numeric'
         });
         
-        let userInfo = [
-            '```',
-            'USER INFORMATION',
-            '═══════════════════════════════════════════════',
-            '',
-            'Account Details',
-            '─────────────────────────────',
-            `Username: ${user.tag}`,
-            `ID: ${user.id}`,
-            `Account Created: ${accountCreated}`,
-            `Bot Account: ${user.bot ? 'Yes' : 'No'}`,
-        ];
+        let description = 
+            `**Account Details**\n` +
+            `Username: ${user.tag}\n` +
+            `ID: ${user.id}\n` +
+            `Account Created: ${accountCreated}\n` +
+            `Bot Account: ${user.bot ? 'Yes' : 'No'}`;
         
         if (member) {
             const joinedDate = member.joinedAt.toLocaleDateString('en-US', {
@@ -38,18 +34,20 @@ module.exports = {
                 .map(role => role.name)
                 .join(', ') || 'None';
             
-            userInfo.push('');
-            userInfo.push('Server Member Details');
-            userInfo.push('─────────────────────────────');
-            userInfo.push(`Joined Server: ${joinedDate}`);
-            userInfo.push(`Nickname: ${member.nickname || 'None'}`);
-            userInfo.push(`Roles: ${roles}`);
+            description += `\n\n**Server Member Details**\n` +
+                `Joined Server: ${joinedDate}\n` +
+                `Nickname: ${member.nickname || 'None'}\n` +
+                `Roles: ${roles}`;
         }
         
-        userInfo.push('');
-        userInfo.push('═══════════════════════════════════════════════');
-        userInfo.push('```');
+        const embed = new EmbedBuilder()
+            .setTitle('User Information')
+            .setDescription(description)
+            .setThumbnail(user.displayAvatarURL())
+            .setFooter({ text: `Requested by ${message.author.tag}` })
+            .setColor(0x5865F2)
+            .setTimestamp();
         
-        await message.reply(userInfo.join('\n'));
+        await message.reply({ embeds: [embed] });
     }
 };

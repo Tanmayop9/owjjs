@@ -1,3 +1,5 @@
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+
 module.exports = {
     data: {
         name: 'help',
@@ -6,25 +8,20 @@ module.exports = {
     async execute(message, args) {
         const commands = message.client.commands;
         
-        // Build clean text-based help message
-        const commandList = [];
-        commandList.push('```');
-        commandList.push('AVAILABLE COMMANDS');
-        commandList.push('═══════════════════════════════════════════════');
-        commandList.push('');
-        
+        let description = '';
         commands.forEach((command) => {
             const name = command.data.name;
-            const description = command.data.description || 'No description available';
-            commandList.push(`!${name}`);
-            commandList.push(`  ${description}`);
-            commandList.push('');
+            const desc = command.data.description || 'No description available';
+            description += `**!${name}**\n${desc}\n\n`;
         });
         
-        commandList.push('═══════════════════════════════════════════════');
-        commandList.push('Use !<command> to execute a command');
-        commandList.push('```');
+        const embed = new EmbedBuilder()
+            .setTitle('Available Commands')
+            .setDescription(description)
+            .setFooter({ text: `Total Commands: ${commands.size} | Use !<command> to execute` })
+            .setColor(0x5865F2)
+            .setTimestamp();
         
-        await message.reply(commandList.join('\n'));
+        await message.reply({ embeds: [embed] });
     }
 };

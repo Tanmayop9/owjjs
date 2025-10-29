@@ -1,3 +1,5 @@
+const { EmbedBuilder } = require('discord.js');
+
 module.exports = {
     data: {
         name: 'serverinfo',
@@ -17,31 +19,27 @@ module.exports = {
             day: 'numeric'
         });
         
-        // Clean text-based server info
-        const serverInfo = [
-            '```',
-            'SERVER INFORMATION',
-            '═══════════════════════════════════════════════',
-            '',
-            'General',
-            '─────────────────────────────',
-            `Name: ${guild.name}`,
-            `ID: ${guild.id}`,
-            `Owner: ${owner.user.tag}`,
-            `Created: ${createdDate}`,
-            '',
-            'Statistics',
-            '─────────────────────────────',
-            `Members: ${guild.memberCount}`,
-            `Channels: ${guild.channels.cache.size}`,
-            `Roles: ${guild.roles.cache.size}`,
-            `Boost Level: ${guild.premiumTier}`,
-            `Boosts: ${guild.premiumSubscriptionCount || 0}`,
-            '',
-            '═══════════════════════════════════════════════',
-            '```'
-        ].join('\n');
+        const description = 
+            `**General**\n` +
+            `Name: ${guild.name}\n` +
+            `ID: ${guild.id}\n` +
+            `Owner: ${owner.user.tag}\n` +
+            `Created: ${createdDate}\n\n` +
+            `**Statistics**\n` +
+            `Members: ${guild.memberCount}\n` +
+            `Channels: ${guild.channels.cache.size}\n` +
+            `Roles: ${guild.roles.cache.size}\n` +
+            `Boost Level: ${guild.premiumTier}\n` +
+            `Boosts: ${guild.premiumSubscriptionCount || 0}`;
         
-        await message.reply(serverInfo);
+        const embed = new EmbedBuilder()
+            .setTitle('Server Information')
+            .setDescription(description)
+            .setThumbnail(guild.iconURL())
+            .setFooter({ text: `Requested by ${message.author.tag}` })
+            .setColor(0x5865F2)
+            .setTimestamp();
+        
+        await message.reply({ embeds: [embed] });
     }
 };
