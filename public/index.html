@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Bot Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .category {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-title {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .command {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .command:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateX(5px);
+        }
+
+        .command:last-child {
+            margin-bottom: 0;
+        }
+
+        .command-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #ffd700;
+        }
+
+        .command-prefix {
+            color: #ff6b6b;
+        }
+
+        .command-description {
+            font-size: 0.95em;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.5em;
+        }
+
+        .error {
+            background: rgba(255, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-text {
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .categories {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="botName">Loading...</h1>
+            <p class="subtitle">Discord Bot Command Dashboard</p>
+            <div class="stats">
+                <div class="stat-box">
+                    <span class="stat-number" id="commandCount">0</span>
+                    <span class="stat-label">Total Commands</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" id="categoryCount">0</span>
+                    <span class="stat-label">Categories</span>
+                </div>
+            </div>
+        </header>
+
+        <div id="content" class="loading">
+            Loading commands...
+        </div>
+
+        <footer>
+            <p class="footer-text">Discord Bot Dashboard | Use prefix <strong>!</strong> to execute commands</p>
+        </footer>
+    </div>
+
+    <script>
+        async function loadBotInfo() {
+            try {
+                const response = await fetch('/api/bot-info');
+                const data = await response.json();
+
+                // Update bot name
+                document.getElementById('botName').textContent = data.botName;
+                document.getElementById('commandCount').textContent = data.totalCommands;
+                document.getElementById('categoryCount').textContent = Object.keys(data.categories).length;
+
+                // Create categories
+                const contentDiv = document.getElementById('content');
+                contentDiv.innerHTML = '';
+                contentDiv.className = 'categories';
+
+                for (const [categoryName, commands] of Object.entries(data.categories)) {
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.className = 'category';
+
+                    const categoryTitle = document.createElement('h2');
+                    categoryTitle.className = 'category-title';
+                    categoryTitle.textContent = categoryName;
+                    categoryDiv.appendChild(categoryTitle);
+
+                    commands.forEach(command => {
+                        const commandDiv = document.createElement('div');
+                        commandDiv.className = 'command';
+
+                        const commandName = document.createElement('div');
+                        commandName.className = 'command-name';
+                        commandName.innerHTML = `<span class="command-prefix">!</span>${command.name}`;
+                        commandDiv.appendChild(commandName);
+
+                        const commandDesc = document.createElement('div');
+                        commandDesc.className = 'command-description';
+                        commandDesc.textContent = command.description;
+                        commandDiv.appendChild(commandDesc);
+
+                        categoryDiv.appendChild(commandDiv);
+                    });
+
+                    contentDiv.appendChild(categoryDiv);
+                }
+
+            } catch (error) {
+                console.error('Error loading bot info:', error);
+                document.getElementById('content').innerHTML = 
+                    '<div class="error">Failed to load bot information. Please try again later.</div>';
+            }
+        }
+
+        // Load bot info when page loads
+        loadBotInfo();
+
+        // Refresh every 30 seconds
+        setInterval(loadBotInfo, 30000);
+    </script>
+</body>
+</html>

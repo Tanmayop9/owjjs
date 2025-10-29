@@ -1,1 +1,143 @@
-# owjjs
+# owjjs - Discord Bot
+
+A Discord bot with improved command UI featuring clean embed-based responses with title, description, footer, and thumbnail (no emojis).
+
+## Features
+
+- Discord embeds with clean design
+- Only uses: title, description, footer, and thumbnail
+- No emojis for professional appearance
+- Button components where applicable
+- Easy-to-use command structure
+- Modular command system
+- **Web Dashboard** - Beautiful web interface to view all commands and bot info
+
+## Web Dashboard
+
+The bot includes a modern web dashboard that displays all commands organized by category. Visit the dashboard to see:
+- Bot information and statistics
+- All commands with descriptions
+- Commands organized by categories
+- Beautiful, responsive design
+
+### Quick Start for Web Dashboard
+
+```bash
+# Install dependencies
+npm install
+
+# Run both bot and web dashboard
+npm run start:all
+
+# Or run web dashboard only
+npm run web
+```
+
+Then open `http://localhost:3000` in your browser.
+
+For detailed setup instructions, see [WEB_DASHBOARD.md](WEB_DASHBOARD.md).
+
+## Commands
+
+All commands use the `!` prefix and respond with Discord embeds.
+
+### General Commands
+
+- `!ping` - Check bot latency and response time
+- `!help` - Display all available commands and their descriptions
+- `!info` - Display bot information and statistics
+- `!serverinfo` - Display information about the current server
+- `!userinfo [@user]` - Display information about a user (mention a user or leave empty for yourself)
+
+### Moderation Commands
+
+- `!clear <amount>` - Clear a specified number of messages (requires Manage Messages permission)
+
+### Utility Commands
+
+- `!stats` - Display detailed bot statistics and performance metrics
+- `!invite` - Get the bot invite link (includes a button to add the bot)
+
+## Setup
+
+1. Clone the repository:
+```bash
+git clone https://github.com/Tanmayop9/owjjs.git
+cd owjjs
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Create a `.env` file in the root directory and add your Discord bot token:
+```
+DISCORD_TOKEN=your_discord_bot_token_here
+```
+
+4. Start the bot:
+```bash
+npm start
+```
+
+## Project Structure
+
+```
+owjjs/
+├── src/
+│   └── commands/        # Command files
+│       ├── ping.js
+│       ├── help.js
+│       ├── info.js
+│       ├── serverinfo.js
+│       ├── userinfo.js
+│       ├── clear.js
+│       ├── stats.js
+│       └── invite.js
+├── index.js             # Main bot file
+├── package.json
+└── README.md
+```
+
+## Adding New Commands
+
+To add a new command, create a new file in `src/commands/` with the following structure:
+
+```javascript
+const { EmbedBuilder } = require('discord.js');
+
+module.exports = {
+    data: {
+        name: 'commandname',
+        description: 'Command description'
+    },
+    async execute(message, args) {
+        const embed = new EmbedBuilder()
+            .setTitle('Your Title')
+            .setDescription('Your description text here')
+            .setFooter({ text: `Requested by ${message.author.tag}` })
+            .setThumbnail(message.client.user.displayAvatarURL()) // Optional
+            .setColor(0x5865F2)
+            .setTimestamp();
+        
+        await message.reply({ embeds: [embed] });
+    }
+};
+```
+
+## UI Design Philosophy
+
+This bot uses Discord embeds with a minimal, professional approach:
+
+- **Discord Embeds**: Uses EmbedBuilder for rich, formatted responses
+- **Limited Fields**: Only uses title, description, footer, and thumbnail
+- **No Emojis**: Keeps the interface professional and consistent
+- **Button Components**: Interactive elements where appropriate (e.g., invite command)
+- **Consistent Colors**: Uses Discord Blurple (0x5865F2) as the primary color
+- **Timestamps**: All embeds include timestamps
+- **Request Attribution**: Footers show who requested each command
+
+## License
+
+ISC
