@@ -10,6 +10,32 @@ A Discord bot with improved command UI featuring clean embed-based responses wit
 - Button components where applicable
 - Easy-to-use command structure
 - Modular command system
+- **Web Dashboard** - Beautiful web interface to view all commands and bot info
+
+## Web Dashboard
+
+The bot includes a modern web dashboard that displays all commands organized by category. Visit the dashboard to see:
+- Bot information and statistics
+- All commands with descriptions
+- Commands organized by categories
+- Beautiful, responsive design
+
+### Quick Start for Web Dashboard
+
+```bash
+# Install dependencies
+npm install
+
+# Run both bot and web dashboard
+npm run start:all
+
+# Or run web dashboard only
+npm run web
+```
+
+Then open `http://localhost:3000` in your browser.
+
+For detailed setup instructions, see [WEB_DASHBOARD.md](WEB_DASHBOARD.md).
 
 ## Commands
 

@@ -1,0 +1,139 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║                    WEB DASHBOARD PREVIEW                             ║
+║                  http://localhost:3000                               ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+┌────────────────────────────────────────────────────────────────────┐
+│                                                                    │
+│                          ┌─────────────────┐                       │
+│                          │     owjjs       │                       │
+│                          └─────────────────┘                       │
+│                   Discord Bot Command Dashboard                    │
+│                                                                    │
+│              ┌──────────────┐      ┌──────────────┐               │
+│              │      8       │      │      4       │               │
+│              │Total Commands│      │  Categories  │               │
+│              └──────────────┘      └──────────────┘               │
+│                                                                    │
+└────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────┐  ┌─────────────────────────────┐
+│ General                     │  │ Information                 │
+├─────────────────────────────┤  ├─────────────────────────────┤
+│                             │  │                             │
+│  ┌─────────────────────┐   │  │  ┌─────────────────────┐   │
+│  │ !ping               │   │  │  │ !info               │   │
+│  │ Check the bot       │   │  │  │ Display bot         │   │
+│  │ latency and response│   │  │  │ information and     │   │
+│  │ time                │   │  │  │ statistics          │   │
+│  └─────────────────────┘   │  │  └─────────────────────┘   │
+│                             │  │                             │
+│  ┌─────────────────────┐   │  │  ┌─────────────────────┐   │
+│  │ !help               │   │  │  │ !serverinfo         │   │
+│  │ Display all         │   │  │  │ Display information │   │
+│  │ available commands  │   │  │  │ about the current   │   │
+│  │ and descriptions    │   │  │  │ server              │   │
+│  └─────────────────────┘   │  │  └─────────────────────┘   │
+│                             │  │                             │
+└─────────────────────────────┘  │  ┌─────────────────────┐   │
+                                 │  │ !userinfo           │   │
+┌─────────────────────────────┐  │  │ Display information │   │
+│ Moderation                  │  │  │ about a user        │   │
+├─────────────────────────────┤  │  └─────────────────────┘   │
+│                             │  │                             │
+│  ┌─────────────────────┐   │  │  ┌─────────────────────┐   │
+│  │ !clear              │   │  │  │ !stats              │   │
+│  │ Clear a specified   │   │  │  │ Display detailed    │   │
+│  │ number of messages  │   │  │  │ bot statistics      │   │
+│  │ (admin only)        │   │  │  └─────────────────────┘   │
+│  └─────────────────────┘   │  │                             │
+│                             │  └─────────────────────────────┘
+└─────────────────────────────┘
+                                 ┌─────────────────────────────┐
+┌─────────────────────────────┐  │ Utility                     │
+│ Footer                      │  ├─────────────────────────────┤
+├─────────────────────────────┤  │                             │
+│ Discord Bot Dashboard       │  │  ┌─────────────────────┐   │
+│ Use prefix ! to execute     │  │  │ !invite             │   │
+│ commands                    │  │  │ Get the bot invite  │   │
+└─────────────────────────────┘  │  │ link and support    │   │
+                                 │  │ server information  │   │
+                                 │  └─────────────────────┘   │
+                                 │                             │
+                                 └─────────────────────────────┘
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                          FEATURES                                    ║
+╠══════════════════════════════════════════════════════════════════════╣
+║                                                                      ║
+║  ✓ Beautiful gradient background (purple theme)                     ║
+║  ✓ Glass-morphism design (frosted glass effect)                     ║
+║  ✓ Responsive grid layout                                           ║
+║  ✓ Auto-refresh every 30 seconds                                    ║
+║  ✓ Hover animations on command cards                                ║
+║  ✓ Organized by categories                                          ║
+║  ✓ Command prefix highlighting (! in red)                           ║
+║  ✓ Command names in gold color                                      ║
+║  ✓ Mobile responsive design                                         ║
+║  ✓ RESTful API endpoint (/api/bot-info)                             ║
+║                                                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+API ENDPOINT EXAMPLE:
+─────────────────────────────────────────────────────────────────────
+GET http://localhost:3000/api/bot-info
+
+Response:
+{
+  "botName": "owjjs",
+  "categories": {
+    "General": [
+      {
+        "name": "ping",
+        "description": "Check the bot latency and response time",
+        "file": "ping.js"
+      },
+      {
+        "name": "help",
+        "description": "Display all available commands...",
+        "file": "help.js"
+      }
+    ],
+    "Information": [
+      {
+        "name": "info",
+        "description": "Display bot information and statistics",
+        "file": "info.js"
+      },
+      ...
+    ],
+    "Moderation": [...],
+    "Utility": [...]
+  },
+  "totalCommands": 8
+}
+
+DESIGN INSPIRATION:
+─────────────────────────────────────────────────────────────────────
+Similar to: https://atommusic.tech
+- Modern gradient backgrounds
+- Card-based layout
+- Clean typography
+- Professional appearance
+- Easy navigation
+
+COLOR SCHEME:
+─────────────────────────────────────────────────────────────────────
+Background: Linear gradient (purple to violet)
+Cards: Semi-transparent white with backdrop blur
+Command Names: Gold (#ffd700)
+Command Prefix: Red (#ff6b6b)
+Text: White with various opacity levels
+
+TECHNOLOGY STACK:
+─────────────────────────────────────────────────────────────────────
+Backend: Express.js (Node.js)
+Frontend: Vanilla HTML/CSS/JavaScript
+API: RESTful JSON endpoint
+Auto-loading: Commands loaded from ./src/commands/
+Categorization: Automatic based on command names
