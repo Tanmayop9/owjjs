@@ -1,0 +1,90 @@
+╔════════════════════════════════════════════════════════════════════╗
+║                     WEB DASHBOARD SCREENSHOT                       ║
+║                    http://localhost:3000                           ║
+╚════════════════════════════════════════════════════════════════════╝
+
+Browser URL: http://localhost:3000
+─────────────────────────────────────────────────────────────────────
+
+[Gradient Background: Purple to Violet]
+
+                          ╔═══════════════════╗
+                          ║      owjjs        ║
+                          ╚═══════════════════╝
+                   Discord Bot Command Dashboard
+
+                ╭──────────────╮    ╭──────────────╮
+                │      8       │    │      4       │
+                │   Commands   │    │  Categories  │
+                ╰──────────────╯    ╰──────────────╯
+
+
+╭────────────────────╮  ╭────────────────────╮  ╭────────────────────╮
+│   General          │  │   Information      │  │   Moderation       │
+├────────────────────┤  ├────────────────────┤  ├────────────────────┤
+│                    │  │                    │  │                    │
+│ ╔════════════════╗ │  │ ╔════════════════╗ │  │ ╔════════════════╗ │
+│ ║ !ping          ║ │  │ ║ !info          ║ │  │ ║ !clear         ║ │
+│ ╠════════════════╣ │  │ ╠════════════════╣ │  │ ╠════════════════╣ │
+│ ║ Check the bot  ║ │  │ ║ Display bot    ║ │  │ ║ Clear messages ║ │
+│ ║ latency and    ║ │  │ ║ information    ║ │  │ ║ (admin only)   ║ │
+│ ║ response time  ║ │  │ ║ and statistics ║ │  │ ║                ║ │
+│ ╚════════════════╝ │  │ ╚════════════════╝ │  │ ╚════════════════╝ │
+│                    │  │                    │  │                    │
+│ ╔════════════════╗ │  │ ╔════════════════╗ │  ╰────────────────────╯
+│ ║ !help          ║ │  │ ║ !serverinfo    ║ │
+│ ╠════════════════╣ │  │ ╠════════════════╣ │  ╭────────────────────╮
+│ ║ Display all    ║ │  │ ║ Display server ║ │  │   Utility          │
+│ ║ available      ║ │  │ ║ information    ║ │  ├────────────────────┤
+│ ║ commands       ║ │  │ ║                ║ │  │                    │
+│ ╚════════════════╝ │  │ ╚════════════════╝ │  │ ╔════════════════╗ │
+│                    │  │                    │  │ ║ !invite        ║ │
+╰────────────────────╯  │ ╔════════════════╗ │  │ ╠════════════════╣ │
+                        │ ║ !userinfo      ║ │  │ ║ Get bot invite ║ │
+                        │ ╠════════════════╣ │  │ ║ link           ║ │
+                        │ ║ Display user   ║ │  │ ║                ║ │
+                        │ ║ information    ║ │  │ ╚════════════════╝ │
+                        │ ╚════════════════╝ │  │                    │
+                        │                    │  ╰────────────────────╯
+                        │ ╔════════════════╗ │
+                        │ ║ !stats         ║ │
+                        │ ╠════════════════╣ │
+                        │ ║ Detailed bot   ║ │
+                        │ ║ statistics     ║ │
+                        │ ╚════════════════╝ │
+                        │                    │
+                        ╰────────────────────╯
+
+
+                    ╔═══════════════════════════╗
+                    ║ Discord Bot Dashboard     ║
+                    ║ Use prefix ! to execute   ║
+                    ╚═══════════════════════════╝
+
+─────────────────────────────────────────────────────────────────────
+
+KEY FEATURES VISIBLE:
+✓ Bot name displayed at top (owjjs)
+✓ Stats showing 8 commands and 4 categories
+✓ Commands organized in grid layout
+✓ Each command shows name with ! prefix
+✓ Command descriptions visible
+✓ Beautiful card-based design
+✓ Hover effects on cards (darker on hover)
+✓ Responsive layout
+
+COLOR SCHEME:
+- Background: Purple gradient (like atommusic.tech)
+- Cards: Semi-transparent white with blur effect
+- Command prefix (!): Red highlight
+- Command names: Gold color
+- Text: White with good contrast
+
+INTERACTIVITY:
+- Cards lift up on hover (transform translateY)
+- Auto-refresh every 30 seconds
+- Smooth transitions and animations
+- Mobile responsive design
+
+API ENDPOINT:
+GET /api/bot-info returns JSON with all commands organized by category
